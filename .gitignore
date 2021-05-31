@@ -7,6 +7,7 @@ target/
 bin/
 .settings/
 *.class
+.project
 
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
