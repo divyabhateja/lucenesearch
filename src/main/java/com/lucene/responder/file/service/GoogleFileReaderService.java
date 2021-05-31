@@ -72,10 +72,7 @@ public class GoogleFileReaderService {
 		// Build a new authorized API client service.
 		final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
 //		final String spreadsheetId = "1YkdmMvSPXRyMNeKa7kjboJGEkSbDSOFp1S314ixuY7s";
-		 String spreadsheetId = request.getId();
-		if(spreadsheetId == null) {
-			spreadsheetId = "1YkdmMvSPXRyMNeKa7kjboJGEkSbDSOFp1S314ixuY7s";
-		}
+		final String spreadsheetId = request.getId();
 		final String range = "Sheet1!A1:P";
 		Sheets service = new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
 				.setApplicationName(APPLICATION_NAME).build();
