@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.lucene.document.Document;
 import org.springframework.stereotype.Service;
 
 import com.google.api.client.auth.oauth2.Credential;
@@ -26,6 +27,7 @@ import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
 import com.google.api.services.sheets.v4.model.ValueRange;
+import com.lucene.responder.search.model.DocumentRequest;
 import com.lucene.responder.search.service.SearchService;
 
 @Service
@@ -66,10 +68,14 @@ public class GoogleFileReaderService {
 		return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
 	}
 
-	public List<Map<String, Object>> getSheetValues() throws IOException, GeneralSecurityException {
+	public List<Map<String, Object>> getSheetValues(DocumentRequest request) throws IOException, GeneralSecurityException {
 		// Build a new authorized API client service.
 		final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-		final String spreadsheetId = "1YkdmMvSPXRyMNeKa7kjboJGEkSbDSOFp1S314ixuY7s";
+//		final String spreadsheetId = "1YkdmMvSPXRyMNeKa7kjboJGEkSbDSOFp1S314ixuY7s";
+		 String spreadsheetId = request.getId();
+		if(spreadsheetId == null) {
+			spreadsheetId = "1YkdmMvSPXRyMNeKa7kjboJGEkSbDSOFp1S314ixuY7s";
+		}
 		final String range = "Sheet1!A1:P";
 		Sheets service = new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
 				.setApplicationName(APPLICATION_NAME).build();

@@ -27,13 +27,10 @@ public class SearchService {
 	
 	@Autowired
 	private LuceneService luceneService;
-	
-	
-	
 
 		public void indexDocument(DocumentRequest request) {
 			try {
-				List<Map<String,Object>> output = googleFileReaderService.getSheetValues();
+				List<Map<String,Object>> output = googleFileReaderService.getSheetValues(request);
 				Directory document = luceneService.indexSheet("Feed",output);
 				List<String> record = luceneService.searchbyProductName(document,"product_name","MAM Easy Start Anti-Colic Bottle 2 Pack 160ml 5oz Grey");
 			} catch (IOException  |GeneralSecurityException e) {

@@ -25,9 +25,18 @@ public class SearchController {
 	private final List<String> RANDOM_INDEX = Arrays.asList("common", "ecom", "product1", "product2", "product3", "product4");
 	
 	@MessageMapping("index")
-	LuceneResponse getCustomer(DocumentRequest request) {
+	LuceneResponse index(DocumentRequest request) {
+		   log.info("Received request-response request: {}", request);
 		searchService.indexDocument(request);
         return new LuceneResponse(request.getId(), getRandomName());
+    }
+	
+
+    @MessageMapping("request-response")
+    LuceneResponse requestResponse(LuceneResponse request) {
+            log.info("Received request-response request: {}", request);
+            // create a single Message and return it
+            return new LuceneResponse(request.getId(), getRandomName());
     }
 
 

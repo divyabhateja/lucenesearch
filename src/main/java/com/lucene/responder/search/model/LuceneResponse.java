@@ -1,10 +1,12 @@
 package com.lucene.responder.search.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
 @ToString
+@Data
 public class LuceneResponse {
 
 	private String id;
